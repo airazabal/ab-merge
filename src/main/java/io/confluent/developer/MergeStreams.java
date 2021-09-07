@@ -97,7 +97,7 @@ public class MergeStreams {
         allProps.put(SCHEMA_REGISTRY_SSL_TRUSTSTORE_PASSWORD, allProps.getProperty("schema.registry.ssl.truststore.password"));
         // for RBAC
         allProps.put(AbstractKafkaSchemaSerDeConfig.BASIC_AUTH_CREDENTIALS_SOURCE, "USER_INFO");
-        allProps.put(SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO, allProps.getProperty("schema.registry.user.info"));
+        allProps.put(SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO, allProps.getProperty("basic.auth.user.info"));
         
 
 
