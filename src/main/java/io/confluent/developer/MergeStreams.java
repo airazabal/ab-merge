@@ -37,7 +37,7 @@ import java.util.Collections;
 public class MergeStreams {
     public static final String SCHEMA_REGISTRY_SSL_TRUSTSTORE_LOCATION = "schema.registry.ssl.truststore.location"; 
     public static final String SCHEMA_REGISTRY_SSL_TRUSTSTORE_PASSWORD = "schema.registry.ssl.truststore.password"; 
-    public static final String SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO = "schema.registry.basic.auth.user.info";
+    public static final String SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO = "basic.auth.user.info";
 
 
     public Topology buildTopology(Properties allProps) {
