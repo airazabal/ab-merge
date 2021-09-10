@@ -1,5 +1,5 @@
-#FROM quay.io/rhdevelopers/ubi8-java-11
-FROM openjdk:11
+FROM quay.io/rhdevelopers/ubi8-java-11
+#FROM openjdk:11
 RUN mkdir -p /deployments/configuration
 RUN chown 1001 /deployments; chown 1001 /deployments/configuration
 USER 1001

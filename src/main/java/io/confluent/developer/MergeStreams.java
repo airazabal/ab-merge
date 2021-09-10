@@ -98,6 +98,7 @@ public class MergeStreams {
         allProps.put(AbstractKafkaSchemaSerDeConfig.BASIC_AUTH_CREDENTIALS_SOURCE, "USER_INFO");
         allProps.put(SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO, allProps.getProperty("basic.auth.user.info"));
         allProps.put(METADATA_SERVER_URL, allProps.getProperty("metadata.server.url"));
+        allProps.put(SslConfigs.SSL_TRUSTSTORE_TYPE_CONFIG, allProps.getProperty("ssl.key.truststore.type.config"));
 
 
 
