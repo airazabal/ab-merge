@@ -84,28 +84,27 @@ public class MergeStreams {
         Properties allProps = ms.loadEnvProperties(args[0]);
         allProps.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         allProps.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, GenericAvroSerde.class);
-        allProps.put(AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, allProps.getProperty("schema.registry.url"));
-        allProps.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, allProps.getProperty("security.protocol.config"));
-        allProps.put(SaslConfigs.SASL_MECHANISM, allProps.getProperty("sasl.mechanism.config"));
-        allProps.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG,allProps.getProperty("ssl.truststore.location.config"));
+         allProps.put(AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, allProps.getProperty("schema.registry.url"));
+        allProps.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, allProps.getProperty("security.protocol"));
+        allProps.put(SaslConfigs.SASL_MECHANISM, allProps.getProperty("sasl.mechanism"));
+        allProps.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG,allProps.getProperty("ssl.truststore.location"));
         allProps.put(SaslConfigs.SASL_JAAS_CONFIG,allProps.getProperty("sasl.jaas.config"));
-        allProps.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, allProps.getProperty("ssl.truststore.password.config"));
-        allProps.put(SslConfigs.SSL_KEYSTORE_TYPE_CONFIG, allProps.getProperty("ssl.key.truststore.type.config"));
-
-        allProps.put(SCHEMA_REGISTRY_SSL_TRUSTSTORE_LOCATION, allProps.getProperty("schema.registry.ssl.truststore.location"));
-        allProps.put(SCHEMA_REGISTRY_SSL_TRUSTSTORE_PASSWORD, allProps.getProperty("schema.registry.ssl.truststore.password"));
+        allProps.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, allProps.getProperty("ssl.truststore.password"));
+     
         // for RBAC
-        allProps.put(AbstractKafkaSchemaSerDeConfig.BASIC_AUTH_CREDENTIALS_SOURCE, "USER_INFO");
-        allProps.put(SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO, allProps.getProperty("basic.auth.user.info"));
-        allProps.put(METADATA_SERVER_URL, allProps.getProperty("metadata.server.url"));
-        allProps.put(SslConfigs.SSL_TRUSTSTORE_TYPE_CONFIG, allProps.getProperty("ssl.key.truststore.type.config"));
-
-
+        //allProps.put(AbstractKafkaSchemaSerDeConfig.BASIC_AUTH_CREDENTIALS_SOURCE, "USER_INFO");
+        //allProps.put(SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO, allProps.getProperty("basic.auth.user.info"));
+        //allProps.put(METADATA_SERVER_URL, allProps.getProperty("metadata.server.url"));
+        allProps.put(SslConfigs.SSL_TRUSTSTORE_TYPE_CONFIG, allProps.getProperty("ssl.key.truststore.type"));
+         // add replication factor
+        allProps.put(StreamsConfig.REPLICATION_FACTOR_CONFIG,allProps.get("replication.factor"));
+        allProps.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG,allProps.get("bootstrap.servers"));
+        allProps.put(StreamsConfig.APPLICATION_ID_CONFIG, allProps.get("applicationId"));
 
         Topology topology = ms.buildTopology(allProps);
 
         
-        final KafkaStreams streams = new KafkaStreams(topology, allProps);
+        final KafkaStreams streams = new KafkaStreams(topology, allProps); 
         final CountDownLatch latch = new CountDownLatch(1);
 
         // Attach shutdown handler to catch Control-C.
