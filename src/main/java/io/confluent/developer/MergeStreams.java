@@ -25,9 +25,13 @@ import java.util.concurrent.CountDownLatch;
 import io.ab.developer.avro.pricing;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
+
+import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
+// confluent
 import io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig;
-import org.apache.kafka.streams.kstream.Produced;
 import io.confluent.kafka.streams.serdes.avro.GenericAvroSerde;
+//
+import org.apache.kafka.streams.kstream.Produced;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericData;
 import org.apache.avro.generic.GenericRecord;
@@ -100,7 +104,7 @@ public class MergeStreams {
         allProps.put(StreamsConfig.REPLICATION_FACTOR_CONFIG,allProps.get("replication.factor"));
         allProps.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG,allProps.get("bootstrap.servers"));
         allProps.put(StreamsConfig.APPLICATION_ID_CONFIG, allProps.get("applicationId"));
-
+        allProps.put(AbstractKafkaAvroSerDeConfig.AUTO_REGISTER_SCHEMAS, false);
         Topology topology = ms.buildTopology(allProps);
 
         
