@@ -57,7 +57,7 @@ public class MergeStreams {
         final Serde<GenericRecord> genericAvroSerde = new GenericAvroSerde();
         final boolean isKeySerde = false;
         genericAvroSerde.configure(
-            Collections.singletonMap(AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, allProps.getProperty("schema.registry.url")),
+            (Map) allProps,
             isKeySerde);
         final KStream<String, GenericRecord> pricingMessage = builder.stream(pricingTopic);
         final KStream<String, GenericRecord> pricingDeleteMessage = builder.stream(pricingDeleteTopic);
